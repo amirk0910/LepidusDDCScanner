@@ -21,7 +21,7 @@ const authCopy = {
 export function AuthShell({ children }: { children: ReactNode }) {
   return <div className="auth-page">
     <aside className="auth-insights" aria-label="Illustrative security insights">
-      <Link href="/login" className="brand-link" aria-label="Lepide MiniDSP home"><Brand /></Link>
+      <Link href="/login" className="brand-link" aria-label="Lepide MiniDSP home"><Brand tone="inverse" /></Link>
       <div className="auth-story"><span className="eyebrow">DATA DISCOVERY & CLASSIFICATION</span>
         <h2>Know your data.<br />Understand your risk.</h2>
         <p>A clear view of sensitive data.<br />A more confident next step.</p>

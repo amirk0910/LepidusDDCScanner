@@ -96,7 +96,7 @@ export function Workspace({ scans, view, preview = false, displayName, email, in
   ];
   return <div className="workspace-shell">
     <div className="nav-rail"><nav className="lp-sidebar" aria-label="Primary navigation" style={{ width: "100%" }}>
-      <div className="lp-sidebar__header"><Link href={href("overview")} aria-label="MiniDSP overview"><Brand compact /></Link></div>
+      <div className="lp-sidebar__header"><Link href={href("overview")} aria-label="MiniDSP overview"><Brand compact tone="inverse" /></Link></div>
       <ul className="lp-sidebar__items">{VIEWS.map(({ key, label, Icon }) => <li key={key}><Link href={href(key)} className={`lp-sidebar__item${view === key ? " lp-sidebar__item--active" : ""}`} aria-current={view === key ? "page" : undefined}><span className="lp-sidebar__icon-box"><Icon aria-hidden="true" /></span><span className="lp-sidebar__label">{label}</span></Link></li>)}</ul>
       <div className="lp-sidebar__footer"><Link href="/setup" className="lp-sidebar__item" aria-label="Setup help"><span className="lp-sidebar__icon-box"><CircleHelp aria-hidden="true" /></span><span className="lp-sidebar__label">Help</span></Link></div>
     </nav></div>

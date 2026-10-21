@@ -1,17 +1,19 @@
 "use client";
 
 import { useEffect, useRef, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode } from "react";
-import { AlertCircle, ChevronDown, ShieldCheck, Inbox } from "lucide-react";
+import Image from "next/image";
+import { AlertCircle, ChevronDown, Inbox } from "lucide-react";
 import type { Risk } from "@/lib/types";
 
 declare global {
   interface Window { Lepidus?: { init: (root?: Element) => void } }
 }
 
-export function Brand({ compact = false }: { compact?: boolean }) {
-  return <span className={`brand ${compact ? "brand-compact" : ""}`}>
-    <ShieldCheck aria-hidden="true" />
-    {!compact && <span>lepide<span className="brand-product">MiniDSP</span></span>}
+export function Brand({ compact = false, tone = "surface" }: { compact?: boolean; tone?: "surface" | "inverse" }) {
+  return <span className={`brand brand-${tone}${compact ? " brand-compact" : ""}`}>
+    {compact
+      ? <Image className="brand-logo" src="/brand/lepide-mark.png" alt="Lepide" width={30} height={39} priority />
+      : <><Image className="brand-logo" src="/brand/lepide-logo.png" alt="Lepide" width={150} height={39} priority /><span className="brand-product">MiniDSP</span></>}
   </span>;
 }
 
