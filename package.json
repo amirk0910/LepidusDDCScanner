@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:rls": "node --use-system-ca --env-file=.env.local scripts/test-rls.mjs"
+    "test:rls": "node --use-system-ca --env-file=.env.local scripts/test-rls.mjs",
+    "test:live": "node --use-system-ca --env-file=.env.local scripts/test-live-api.mjs"
   },
   "dependencies": {
     "@fontsource/open-sans": "^5.2.7",
