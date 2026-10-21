@@ -1,4 +1,5 @@
 import { AppError, errorResponse } from "@/lib/errors";
+import { isTrustedOrigin } from "@/lib/origin";
 import { readScans } from "@/lib/records";
 import { scanAndSave } from "@/lib/scan-service";
 import { requireApiUser } from "@/lib/supabase/server";
@@ -18,7 +19,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    if (request.headers.get("origin") !== new URL(request.url).origin) throw new AppError("This upload must be submitted from the MiniDSP application.", 403);
+    if (!isTrustedOrigin(request)) throw new AppError("This upload must be submitted from the MiniDSP application.", 403);
     const { client } = await requireApiUser();
     const file = await readUpload(request);
     return Response.json(await scanAndSave(file, client), { status: 201 });

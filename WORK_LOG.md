@@ -17,6 +17,7 @@
 - No `.env.local` / Supabase connection: live authentication, persistence, and two-user Supabase isolation remain UNVERIFIED.
 - `scripts/test-rls.mjs` is missing; the `test:rls` script cannot run until it is supplied.
 - Not deployed to GitHub or Vercel. Deployment and hosted end-to-end behavior remain UNVERIFIED.
+- Local sign-in bounced back to `/login` (2026-10-21): server-side Node calls to Supabase failed with `SELF_SIGNED_CERT_IN_CHAIN` (TLS inspection on this machine; browser trusts the OS store, Node does not). Fix: `npm run dev` now starts Next.js via `scripts/dev.mjs` with `--use-system-ca`; certificate verification is NOT disabled. Node connectivity check with the OS store returned HTTP 200; the full browser sign-in retest is UNVERIFIED until the user retries.
 - The read-only interface preview contains fictional data, not a simulated live Supabase connection.
 - Token-based SVG charts are an approved design exception because the documented Lepidus React package was unavailable from npm.
 - Dependency audit: production dependencies reported zero vulnerabilities; five development-only advisories remain in the Next.js lint dependency chain. No forced framework downgrade was performed.
