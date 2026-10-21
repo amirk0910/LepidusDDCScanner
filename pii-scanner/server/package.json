@@ -1,0 +1,23 @@
+{
+  "name": "pii-scanner-server",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "scan": "node cli.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "fast-xml-parser": "^4.5.1",
+    "mammoth": "^1.8.0",
+    "multer": "^2.0.0",
+    "pdf-parse": "^2.4.5",
+    "xlsx": "^0.18.5"
+  },
+  "optionalDependencies": {
+    "re2": "^1.21.4"
+  }
+}

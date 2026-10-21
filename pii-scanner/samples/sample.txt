@@ -1,0 +1,13 @@
+BANK STATEMENT  - Statement period: 01 Sep 2026 to 30 Sep 2026
+Account summary: Opening balance 12,400.00   Closing balance 9,850.00
+Customer email: rahul.sharma@example.com
+Invoice order 55555 should be ignored by the minus keyword
+Aadhaar Number: 2345 6789 0124
+Random 12 digit ref (not aadhaar): 9876 5432 1098
+PAN Card: ABCPE1234F
+Visa card number: 4111 1111 1111 1111
+Bad card: 4111 1111 1111 1112
+IBAN: GB82 WEST 1234 5698 7654 32
+SSN: 123-45-6789
+Employee code 234-56-7890 (no keyword nearby, so it must be dropped because evidence is required)
+Mailing address zip code 10001
