@@ -47,12 +47,12 @@ export function AuthShell({ children }: { children: ReactNode }) {
   </div>;
 }
 
-export function AuthForm({ mode, configured, confirmationError = false }: { mode: AuthMode; configured: boolean; confirmationError?: boolean }) {
+export function AuthForm({ mode, configured, confirmationError = false, registered = false }: { mode: AuthMode; configured: boolean; confirmationError?: boolean; registered?: boolean }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState(confirmationError ? "The confirmation link is invalid or expired. Request a new email or sign in again." : "");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState(registered ? "Account created. Sign in with your email and password to continue." : "");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const copy = authCopy[mode];
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -81,7 +81,11 @@ export function AuthForm({ mode, configured, confirmationError = false }: { mode
           options: { data: { display_name: String(form.get("name")).trim() }, emailRedirectTo: `${window.location.origin}/auth/callback` },
         });
         if (error) { setError(error.message); return; }
-        if (data.session) { router.replace("/dashboard"); router.refresh(); }
+        if (data.session) {
+          const { error: signOutError } = await client.auth.signOut();
+          if (signOutError) { setError("Your account was created, but we could not finish setting it up. Go to the sign-in page and sign in."); return; }
+          router.replace("/login?registered=1"); router.refresh();
+        }
         else setSuccess("Check your inbox to confirm your email, then sign in. If you already have an account, use the sign-in page.");
       } else if (mode === "forgot") {
         const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/auth/callback?next=/update-password` });
