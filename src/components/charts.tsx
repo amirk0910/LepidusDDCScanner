@@ -27,7 +27,7 @@ export function TrendChart({ labels, values, name = "Findings", compact = false 
       {values.map((value, index) => <g key={labels[index]}>
         <circle cx={x(index)} cy={y(value)} r={active === index ? 6 : 4} fill="var(--color-background-surface)" stroke="var(--color-brand-accent)" strokeWidth="2.5" tabIndex={0} role="button" aria-label={`${labels[index]}: ${value} ${name.toLowerCase()}`} onFocus={() => setFocused(index)} onMouseEnter={() => setFocused(index)} onClick={() => setFocused(index)} onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setFocused(index); }
-        }}><title>{labels[index]}: {value} {name.toLowerCase()}</title></circle>
+        }}><title>{`${labels[index]}: ${value} ${name.toLowerCase()}`}</title></circle>
         {(labels.length <= 8 || index % Math.ceil(labels.length / 7) === 0 || index === labels.length - 1) && <text x={x(index)} y="184" textAnchor="middle" className="chart-axis">{labels[index]}</text>}
       </g>)}
     </svg>
@@ -46,7 +46,7 @@ export function RiskDonut({ data }: { data: { risk: Risk; value: number }[] }) {
         const start = total ? segments.slice(0, index).reduce((sum, previous) => sum + previous.value, 0) / total * 100 : 0;
         const percent = total ? (item.value / total) * 100 : 0;
         return <circle key={item.risk} cx="95" cy="95" r="70" pathLength="100" fill="none" stroke={RISK_COLORS[item.risk]} strokeWidth={active === item.risk ? 24 : 19} strokeDasharray={`${percent} ${100 - percent}`} strokeDashoffset={-start} transform="rotate(-90 95 95)" tabIndex={0} onFocus={() => setActive(item.risk)} onMouseEnter={() => setActive(item.risk)}>
-          <title>{item.risk}: {item.value} files</title>
+          <title>{`${item.risk}: ${item.value} files`}</title>
         </circle>;
       })}
       <text x="95" y="94" textAnchor="middle" className="donut-value">{total.toLocaleString()}</text>
